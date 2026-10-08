@@ -16,6 +16,7 @@ says exactly what was tested.
 
 [Choose a path](#choose-your-path) ·
 [Run Tiffin locally](docs/local-workflows.md) ·
+[Engineering conventions](docs/engineering-workflows.md) ·
 [Explore the architecture](docs/architecture.md) ·
 [AI engineering](docs/ai-engineering.md) ·
 [Design sources](docs/design-sources.md) ·
@@ -210,9 +211,9 @@ Tiffin has three supported local workflows. Choose the row that matches what you
 
 | Workflow | Docker runs | You run from source | What it gives you | First command |
 |---|---|---|---|---|
-| **Backend Developer** | Infrastructure, identity, edge, and frontend | Nine .NET services | Service breakpoints, migrations, message-flow diagnostics, and all real product boundaries | `scripts/up.sh` |
-| **Frontend Developer** | Complete seeded backend, identity, and edge | Customer, Operations, and both BFFs | Next.js hot reload, BFF/session debugging, real identities, roles, APIs, media, and realtime behavior without local .NET | `scripts/full-demo.sh up-backend` |
-| **Full Demo** | The entire product | Nothing | A health-checked, source-built, seeded product evaluation without installing Node.js or .NET | `scripts/full-demo.sh up` |
+| **Hybrid Mode** | Infrastructure, identity, edge, and frontend | Nine .NET services | Service breakpoints, migrations, message-flow diagnostics, and all real product boundaries | `scripts/up.sh` |
+| **Frontend Mode** | Complete seeded backend, identity, and edge | Customer, Operations, and both BFFs | Next.js hot reload, BFF/session debugging, real identities, roles, APIs, media, and realtime behavior without local .NET | `scripts/full-demo.sh up-backend` |
+| **Full Demo Mode** | The entire product | Nothing | A health-checked, source-built, seeded product evaluation without installing Node.js or .NET | `scripts/full-demo.sh up` |
 
 Clone the four source boundaries as siblings:
 
@@ -223,7 +224,55 @@ git clone https://github.com/panahister/tiffin-keycloak.git
 git clone https://github.com/panahister/tiffin-apisix.git
 ```
 
-For the shortest evaluation:
+Run the mode that matches your work. Each block starts from the sibling layout above.
+
+<details>
+<summary><strong>Hybrid Mode — debug the nine backend services on the host</strong></summary>
+
+```bash
+cd mpcore-tiffin-sample
+scripts/up.sh
+scripts/setup.sh
+scripts/run.sh all
+python3 scripts/seed-us-poc.py
+
+cd ../mpfrontend-tiffin-reference
+node scripts/verify-core-artifacts.mjs
+pnpm install --frozen-lockfile
+docker compose -f compose.local.yaml up --detach --build --wait
+```
+
+Verify Customer and Operations, then run the complete backend scenarios:
+
+```bash
+curl --fail --silent http://localhost:4411/ >/dev/null
+curl --fail --silent http://localhost:4412/ >/dev/null
+cd ../mpcore-tiffin-sample
+scripts/scenarios.sh
+```
+
+</details>
+
+<details>
+<summary><strong>Frontend Mode — run Customer, Operations, and both BFFs from source</strong></summary>
+
+```bash
+cd mpcore-tiffin-sample
+scripts/full-demo.sh up-backend
+
+cd ../mpfrontend-tiffin-reference
+node scripts/verify-core-artifacts.mjs
+pnpm install --frozen-lockfile
+pnpm dev:product
+```
+
+Open Customer at `http://localhost:4411` and Operations at `http://localhost:4412`. The Docker backend
+and seeded data remain running when the host frontend is stopped.
+
+</details>
+
+<details>
+<summary><strong>Full Demo Mode — evaluate the complete product with Git and Docker only</strong></summary>
 
 ```bash
 cd mpcore-tiffin-sample
@@ -233,6 +282,29 @@ scripts/full-demo.sh up
 Open Customer at `http://localhost:4411` and Operations at `http://localhost:4412`. The command builds
 every application image from the checked-out source, waits for health, and applies the idempotent US demo
 seed through product APIs.
+
+</details>
+
+Normal stop preserves local data. For Frontend Mode or Full Demo Mode:
+
+```bash
+cd mpcore-tiffin-sample
+scripts/full-demo.sh down
+```
+
+For Hybrid Mode, stop the frontend, host services, and dependencies in that order:
+
+```bash
+cd mpfrontend-tiffin-reference
+docker compose -f compose.local.yaml down
+
+cd ../mpcore-tiffin-sample
+scripts/run.sh stop
+scripts/down.sh
+```
+
+Use `scripts/full-demo.sh reset` or `scripts/down.sh --volumes` only when deleting local demo state is
+intentional. Do not run two modes together; they deliberately use the same product origins and ports.
 
 The [local-workflow guide](docs/local-workflows.md) explains prerequisites, exact commands, what runs
 where, first-run behavior, trade-offs, URLs, observability, RustFS/SeaweedFS selection, and safe
@@ -280,6 +352,7 @@ secret custody, regional failover, or published MP Frontend registry packages. R
 | Choose code-first, existing DLS, or understand the deferred Community path | [Design-source paths](docs/design-sources.md) |
 | Evaluate one part without adopting everything | [Adoption paths](docs/adoption.md) |
 | Run or debug the complete Tiffin reference | [Local workflows](docs/local-workflows.md) |
+| Follow the standard backend/frontend feature path | [Engineering workflows](docs/engineering-workflows.md) |
 | Find the right repository for an issue or contribution | [Repository map](docs/repositories.md) |
 | Understand what is proven and what remains open | [Maturity](docs/maturity.md) |
 | Propose an ecosystem-level change | [Contributing](CONTRIBUTING.md) |
