@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="1200" height="540" role="img" aria-label="MP Frontend design-source choices: code-first and consumer-owned DLS are implemented, while a Community DLS is not available in the MVP">
+  <title>MP Frontend design-source paths</title>
+  <defs>
+    <linearGradient id="flow" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#315fe8"/><stop offset="0.5" stop-color="#6d5bd0"/><stop offset="1" stop-color="#14a695"/></linearGradient>
+    <filter id="shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="13" flood-color="#18305e" flood-opacity="0.12"/></filter>
+  </defs>
+  <rect width="1200" height="540" rx="24" fill="#f4f7fc"/><rect x="1" y="1" width="1198" height="538" rx="23" fill="none" stroke="#d7deeb"/><rect width="1200" height="7" rx="3.5" fill="url(#flow)"/>
+  <text x="60" y="65" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13" font-weight="750" letter-spacing="2.1" fill="#315fe8">DESIGN OWNERSHIP IS A PRODUCT CHOICE</text>
+  <text x="60" y="108" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="29" font-weight="800" fill="#101827">Start from code, bring your own DLS, or wait for a future public source.</text>
+  <text x="60" y="139" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="15.5" fill="#5b687c">The MVP implements two paths and explicitly refuses the unshipped third path.</text>
+
+  <g transform="translate(48 190)" filter="url(#shadow)">
+    <rect width="336" height="260" rx="20" fill="#fff" stroke="#9aace8"/><rect width="8" height="260" rx="4" fill="#315fe8"/>
+    <rect x="228" y="22" width="84" height="28" rx="14" fill="#e8f8f5"/><text x="270" y="41" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="11" font-weight="750" fill="#08796c">READY</text>
+    <text x="28" y="44" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13" font-weight="700" fill="#315fe8">--design-source none</text>
+    <text x="28" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="24" font-weight="780" fill="#101827">Code-first</text>
+    <text x="28" y="123" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#5b687c">Use code-owned tokens and</text><text x="28" y="146" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#5b687c">components immediately.</text>
+    <line x1="28" y1="171" x2="308" y2="171" stroke="#e0e6f0"/>
+    <text x="28" y="202" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="12" font-weight="720" fill="#315fe8">STATE</text><text x="89" y="202" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13.5" fill="#334155">disabled · usable</text>
+    <text x="28" y="229" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="12" font-weight="720" fill="#315fe8">LATER</text><text x="89" y="229" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13.5" fill="#334155">may attach existing</text>
+  </g>
+
+  <g transform="translate(432 190)" filter="url(#shadow)">
+    <rect width="336" height="260" rx="20" fill="#fff" stroke="#cfc8ee"/><rect width="8" height="260" rx="4" fill="#6d5bd0"/>
+    <rect x="228" y="22" width="84" height="28" rx="14" fill="#e8f8f5"/><text x="270" y="41" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="11" font-weight="750" fill="#08796c">READY</text>
+    <text x="28" y="44" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13" font-weight="700" fill="#6d5bd0">--design-source existing</text>
+    <text x="28" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="24" font-weight="780" fill="#101827">Bring your own DLS</text>
+    <text x="28" y="123" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#5b687c">Attach a reviewed local binding</text><text x="28" y="146" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#5b687c">without transferring ownership.</text>
+    <line x1="28" y1="171" x2="308" y2="171" stroke="#e0e6f0"/>
+    <text x="28" y="202" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="12" font-weight="720" fill="#6d5bd0">STATE</text><text x="89" y="202" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13.5" fill="#334155">pending → attached</text>
+    <text x="28" y="229" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="12" font-weight="720" fill="#6d5bd0">FLOW</text><text x="89" y="229" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13.5" fill="#334155">reviewed · hash-bound</text>
+  </g>
+
+  <g transform="translate(816 190)" filter="url(#shadow)">
+    <rect width="336" height="260" rx="20" fill="#f1f4f8" stroke="#aeb9c8" stroke-dasharray="7 6"/><rect width="8" height="260" rx="4" fill="#7b8798"/>
+    <rect x="194" y="22" width="118" height="28" rx="14" fill="#e2e7ee"/><text x="253" y="41" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="11" font-weight="750" fill="#536174">NOT IN MVP</text>
+    <text x="28" y="44" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13" font-weight="700" fill="#697789">no accepted CLI mode</text>
+    <text x="28" y="88" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="24" font-weight="780" fill="#334155">MP Community DLS</text>
+    <text x="28" y="123" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#697789">Future path only; no public,</text><text x="28" y="146" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" fill="#697789">versioned design source ships today.</text>
+    <line x1="28" y1="171" x2="308" y2="171" stroke="#d4dbe5"/>
+    <text x="28" y="202" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="12" font-weight="720" fill="#697789">LEGACY</text><text x="93" y="202" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13.5" fill="#536174">template mode refused</text>
+    <text x="28" y="229" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="12" font-weight="720" fill="#697789">RULE</text><text x="93" y="229" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="13.5" fill="#536174">do not promise it</text>
+  </g>
+  <text x="600" y="505" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif" font-size="14" font-weight="650" fill="#334155">MP Frontend validates reviewed local contracts. It never fetches, mutates, or publishes a Figma file.</text>
+</svg>

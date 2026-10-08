@@ -1,0 +1,43 @@
+name: Ecosystem question
+description: Ask about adoption, repository ownership, or cross-repository architecture
+title: "[Ecosystem]: "
+labels: [question]
+body:
+  - type: dropdown
+    id: path
+    attributes:
+      label: Adoption path
+      options:
+        - Backend only
+        - Frontend only
+        - End to end
+        - Repository ownership
+        - Evidence and maturity
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: Describe the product outcome or decision you are trying to reach.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Include relevant repositories, revisions, and constraints. Remove private information.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I reviewed the repository map and adoption paths.
+          required: true
+        - label: This report contains no secrets, personal data, or private design material.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true
+

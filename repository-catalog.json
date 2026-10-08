@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-10-08",
+  "repositories": [
+    {
+      "name": "mpcore",
+      "url": "https://github.com/panahister/mpcore",
+      "group": "foundation",
+      "role": "backend",
+      "maturity": "published-packages"
+    },
+    {
+      "name": "mpfrontend",
+      "url": "https://github.com/panahister/mpfrontend",
+      "group": "foundation",
+      "role": "frontend",
+      "maturity": "public-source-poc"
+    },
+    {
+      "name": "mpcore-tiffin-sample",
+      "url": "https://github.com/panahister/mpcore-tiffin-sample",
+      "group": "reference",
+      "role": "food-delivery-backend",
+      "maturity": "reference-poc"
+    },
+    {
+      "name": "mpfrontend-tiffin-reference",
+      "url": "https://github.com/panahister/mpfrontend-tiffin-reference",
+      "group": "reference",
+      "role": "food-delivery-frontend",
+      "maturity": "reference-poc"
+    },
+    {
+      "name": "tiffin-keycloak",
+      "url": "https://github.com/panahister/tiffin-keycloak",
+      "group": "integration",
+      "role": "identity",
+      "maturity": "reference-poc"
+    },
+    {
+      "name": "tiffin-apisix",
+      "url": "https://github.com/panahister/tiffin-apisix",
+      "group": "integration",
+      "role": "edge",
+      "maturity": "reference-poc"
+    },
+    {
+      "name": "mpcore-storefront-sample",
+      "url": "https://github.com/panahister/mpcore-storefront-sample",
+      "group": "reference",
+      "role": "commerce-backend",
+      "maturity": "reference-poc"
+    }
+  ]
+}

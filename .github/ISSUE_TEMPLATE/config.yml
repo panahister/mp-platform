@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/panahister/mp-platform/security/advisories/new
+    about: Report cross-repository vulnerabilities privately through GitHub Security Advisories.
+  - name: Repository ownership
+    url: https://github.com/panahister/mp-platform/blob/main/docs/repositories.md
+    about: Find the repository that owns a runtime, product, identity, or edge change.
+
