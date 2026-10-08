@@ -208,11 +208,11 @@ source file, or publish it. Continue with the [frontend guide](https://github.co
 
 Tiffin has three supported local workflows. Choose the row that matches what you want to edit:
 
-| Workflow | Docker runs | You run from source | First command |
-|---|---|---|---|
-| **Backend Developer** | Infrastructure, identity, edge, and frontend | Nine .NET services | `scripts/up.sh` |
-| **Frontend Developer** | Complete seeded backend, identity, and edge | Customer, Operations, and both BFFs | `scripts/full-demo.sh up-backend` |
-| **Full Demo** | The entire product | Nothing | `scripts/full-demo.sh up` |
+| Workflow | Docker runs | You run from source | What it gives you | First command |
+|---|---|---|---|---|
+| **Backend Developer** | Infrastructure, identity, edge, and frontend | Nine .NET services | Service breakpoints, migrations, message-flow diagnostics, and all real product boundaries | `scripts/up.sh` |
+| **Frontend Developer** | Complete seeded backend, identity, and edge | Customer, Operations, and both BFFs | Next.js hot reload, BFF/session debugging, real identities, roles, APIs, media, and realtime behavior without local .NET | `scripts/full-demo.sh up-backend` |
+| **Full Demo** | The entire product | Nothing | A health-checked, source-built, seeded product evaluation without installing Node.js or .NET | `scripts/full-demo.sh up` |
 
 Clone the four source boundaries as siblings:
 
