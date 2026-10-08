@@ -9,8 +9,8 @@ The architecture is identical in every local workflow. Only the host/container b
 ```mermaid
 flowchart TD
   START[What do you want to work on?]
-  START -->|Backend code and service behavior| BE[Backend Developer Mode]
-  START -->|UI, BFF, localization, or product adapters| FE[Frontend Developer Mode]
+  START -->|Backend code and service behavior| BE[Hybrid Mode]
+  START -->|UI, BFF, localization, or product adapters| FE[Frontend Mode]
   START -->|Evaluate the integrated product| DEMO[Full Demo Mode]
   BE --> BED[Dependencies and frontend in Docker<br/>Nine .NET services on the host]
   FE --> FED[Complete seeded backend in Docker<br/>Four frontend processes on the host]
@@ -45,7 +45,7 @@ against framework source.
 
 ## Compare the workflows
 
-| | Backend Developer | Frontend Developer | Full Demo |
+| | Hybrid Mode | Frontend Mode | Full Demo Mode |
 |---|---|---|---|
 | Primary audience | Backend engineers | Frontend engineers | Reviewers and first-time evaluators |
 | Docker runs | Dependencies, identity, edge, frontend | Complete seeded backend, identity, and edge | Entire product |
@@ -59,7 +59,7 @@ RustFS is the default media store in every mode. SeaweedFS remains an explicit, 
 is not a hidden fallback. The local topologies are reference profiles, not production security or HA
 acceptance.
 
-## Mode 1: Backend Developer
+## Mode 1: Hybrid Mode
 
 Use this mode for business slices, migrations, service contracts, message flows, and scenario debugging.
 Infrastructure stays reproducible in Docker, while the nine .NET processes remain visible to the IDE.
@@ -80,6 +80,18 @@ node scripts/verify-core-artifacts.mjs
 pnpm install --frozen-lockfile
 docker compose -f compose.local.yaml up --detach --build --wait
 ```
+
+Hybrid Mode is ready when both browser applications respond and the host services are still visible to
+your debugger:
+
+```bash
+curl --fail --silent http://localhost:4411/ >/dev/null
+curl --fail --silent http://localhost:4412/ >/dev/null
+```
+
+Your normal edit loop is: stop one host service, run that service from the IDE, exercise the browser or
+focused scenario, then run the complete scenario suite before review. Frontend containers continue to
+use the same service ports, Keycloak realm, APISIX routes, and seeded data; no mock backend is introduced.
 
 Run all sixteen backend stories when the change is ready for connected verification:
 
@@ -104,7 +116,7 @@ scripts/run.sh stop
 scripts/down.sh
 ```
 
-## Mode 2: Frontend Developer
+## Mode 2: Frontend Mode
 
 Use this mode for Customer or Operations UI, BFF composition, generated-contract integration,
 localization, themes, and realtime presentation work. The developer does not need the .NET SDK or the
@@ -131,6 +143,18 @@ development mode; the BFFs keep provider tokens behind the server boundary and u
 Redis validation profile. Press `Ctrl+C` once to stop all four host processes. The backend and its demo
 data remain running, so another frontend session starts quickly.
 
+Frontend Mode is ready when all three checks exit successfully:
+
+```bash
+curl --fail --silent http://localhost:4411/ >/dev/null
+curl --fail --silent http://localhost:4412/ >/dev/null
+curl --fail --silent 'http://localhost:4411/api/catalog?search=seattle&page=1&size=1' >/dev/null
+```
+
+The normal edit loop keeps `scripts/full-demo.sh up-backend` running, changes Customer, Operations, a
+BFF, localization, or a product adapter on the host, and relies on Next.js hot reload for presentation
+changes. Restart `pnpm dev:product` after BFF or launcher changes.
+
 Stop the Docker backend later without deleting its data:
 
 ```bash
@@ -142,7 +166,7 @@ Read the frontend
 [local-development guide](https://github.com/panahister/mpfrontend-tiffin-reference/blob/main/docs/LOCAL-DEVELOPMENT.md)
 for focused verification, trust details, and frontend-specific troubleshooting.
 
-## Mode 3: Full Demo
+## Mode 3: Full Demo Mode
 
 Use this mode when the goal is to see the product rather than edit one runtime. Git and Docker are the
 only host prerequisites.
@@ -165,6 +189,18 @@ The command:
 The first build can take several minutes because it restores .NET and Node dependencies. Later starts
 reuse Docker layers and persistent data. The seed is idempotent, so a normal restart does not duplicate
 restaurants or menu items.
+
+The command prints `The complete Tiffin demo is ready.` only after health checks and the product-API seed
+succeed. Verify the public product surfaces with:
+
+```bash
+curl --fail --silent http://localhost:4411/ >/dev/null
+curl --fail --silent http://localhost:4412/ >/dev/null
+curl --fail --silent http://localhost:38180/realms/tiffin/.well-known/openid-configuration >/dev/null
+```
+
+If any command fails, run `scripts/full-demo.sh status` first and then
+`scripts/full-demo.sh logs`; do not bypass health checks or change the published OIDC origins.
 
 ## URLs and lifecycle
 
@@ -213,17 +249,31 @@ The modes intentionally keep the same browser and service origins. Stop one mode
 another. In particular:
 
 - Full Demo owns `4411`, `4412`, and the backend service ports.
-- Frontend Developer Mode leaves `4411` and `4412` free, but owns the backend service ports.
-- Backend Developer Mode owns those service ports from host .NET processes.
+- Frontend Mode leaves `4411` and `4412` free, but owns the backend service ports.
+- Hybrid Mode owns those service ports from host .NET processes.
 
 A failed start caused by an occupied port is a lifecycle conflict, not a reason to change the published
 origins or weaken OIDC validation.
+
+## Troubleshooting map
+
+| Symptom | Check | Recovery |
+|---|---|---|
+| A sibling source repository is not found | Confirm all four repositories use the documented sibling layout | Move the checkout or set the documented `TIFFIN_*_SOURCE_DIR` override |
+| The first start appears slow | Inspect Docker build output; the first run restores .NET and Node dependencies | Let the build finish; later starts reuse immutable layers |
+| Port `4411`, `4412`, or a backend port is occupied | Confirm another mode or local process is still running | Stop that mode with its documented stop sequence; do not change OIDC origins |
+| A container never becomes healthy | Run `scripts/full-demo.sh status` and `scripts/full-demo.sh logs` | Repair the named dependency; use `reset` only when deleting demo data is intentional |
+| Login reaches the wrong callback or fails issuer validation | Confirm the documented localhost URLs and that Keycloak is healthy | Restore the checked-in local profile; never weaken issuer or callback validation |
+| Frontend source cannot trust APISIX | Start `up-backend` before `pnpm dev:product` so the generated local certificate exists | Restart the frontend launcher after the backend reports ready |
+
+`down` is the normal stop command and preserves state. `reset` is destructive to named demo volumes and
+is a troubleshooting last step, not a routine restart.
 
 ## What these modes prove
 
 All three modes exercise the same source boundaries and runtime architecture. Full Demo proves that a
 new evaluator can build and start the integrated POC without installing both product toolchains.
-Frontend and Backend Developer modes prove that each discipline can retain a practical debugger and
+Frontend and Hybrid modes prove that each discipline can retain a practical debugger and
 feedback loop without replacing another boundary with mocks.
 
 They do not prove production HA, TLS and key custody, backup/restore, load and soak capacity, regional
