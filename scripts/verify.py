@@ -27,6 +27,7 @@ REQUIRED_FILES = {
     "docs/adoption.md",
     "docs/ai-engineering.md",
     "docs/design-sources.md",
+    "docs/local-workflows.md",
     "docs/repositories.md",
     "docs/maturity.md",
     "docs/images/hero.svg",

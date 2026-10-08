@@ -15,6 +15,7 @@ says exactly what was tested.
 [![Status](https://img.shields.io/badge/status-public%20POC-14b8a6)](docs/maturity.md)
 
 [Choose a path](#choose-your-path) ·
+[Run Tiffin locally](docs/local-workflows.md) ·
 [Explore the architecture](docs/architecture.md) ·
 [AI engineering](docs/ai-engineering.md) ·
 [Design sources](docs/design-sources.md) ·
@@ -205,7 +206,15 @@ source file, or publish it. Continue with the [frontend guide](https://github.co
 
 ### Full-stack reference
 
-Clone the four Tiffin source boundaries as siblings:
+Tiffin has three supported local workflows. Choose the row that matches what you want to edit:
+
+| Workflow | Docker runs | You run from source | First command |
+|---|---|---|---|
+| **Backend Developer** | Infrastructure, identity, edge, and frontend | Nine .NET services | `scripts/up.sh` |
+| **Frontend Developer** | Complete seeded backend, identity, and edge | Customer, Operations, and both BFFs | `scripts/full-demo.sh up-backend` |
+| **Full Demo** | The entire product | Nothing | `scripts/full-demo.sh up` |
+
+Clone the four source boundaries as siblings:
 
 ```bash
 git clone https://github.com/panahister/mpcore-tiffin-sample.git
@@ -214,8 +223,23 @@ git clone https://github.com/panahister/tiffin-keycloak.git
 git clone https://github.com/panahister/tiffin-apisix.git
 ```
 
-Start with the [Tiffin backend running guide](https://github.com/panahister/mpcore-tiffin-sample/blob/main/docs/running.md),
-then follow the [frontend local-development guide](https://github.com/panahister/mpfrontend-tiffin-reference/blob/main/docs/LOCAL-DEVELOPMENT.md).
+For the shortest evaluation:
+
+```bash
+cd mpcore-tiffin-sample
+scripts/full-demo.sh up
+```
+
+Open Customer at `http://localhost:4411` and Operations at `http://localhost:4412`. The command builds
+every application image from the checked-out source, waits for health, and applies the idempotent US demo
+seed through product APIs.
+
+The [local-workflow guide](docs/local-workflows.md) explains prerequisites, exact commands, what runs
+where, first-run behavior, trade-offs, URLs, observability, RustFS/SeaweedFS selection, and safe
+stop/reset semantics. It then routes backend work to the
+[backend running guide](https://github.com/panahister/mpcore-tiffin-sample/blob/main/docs/running.md) and
+frontend work to the
+[frontend local-development guide](https://github.com/panahister/mpfrontend-tiffin-reference/blob/main/docs/LOCAL-DEVELOPMENT.md).
 
 ## Evidence before claims
 
@@ -255,6 +279,7 @@ secret custody, regional failover, or published MP Frontend registry packages. R
 | Understand AI procedures, agent discovery, and human gates | [AI engineering](docs/ai-engineering.md) |
 | Choose code-first, existing DLS, or understand the deferred Community path | [Design-source paths](docs/design-sources.md) |
 | Evaluate one part without adopting everything | [Adoption paths](docs/adoption.md) |
+| Run or debug the complete Tiffin reference | [Local workflows](docs/local-workflows.md) |
 | Find the right repository for an issue or contribution | [Repository map](docs/repositories.md) |
 | Understand what is proven and what remains open | [Maturity](docs/maturity.md) |
 | Propose an ecosystem-level change | [Contributing](CONTRIBUTING.md) |
