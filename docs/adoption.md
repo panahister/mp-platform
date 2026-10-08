@@ -47,6 +47,9 @@ documentation. Read [Design-source paths](design-sources.md) before creating the
 Choose this path when the team wants both foundations and needs evidence across identity, edge, frontend,
 services, messaging, data, media, and realtime behavior.
 
+Start with the [role-based local workflow guide](local-workflows.md). It separates backend debugging,
+frontend debugging, and one-command product evaluation without changing the architecture being tested.
+
 1. Run the Tiffin backend scenario matrices with the default RustFS profile.
 2. Run the customer and operations applications through the Security BFF and APISIX.
 3. Complete one order from catalog discovery through payment, kitchen, dispatch, tracking, delivery, and
