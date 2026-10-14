@@ -1,20 +1,24 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-08",
+  "updated": "2026-10-14",
   "repositories": [
     {
       "name": "mpcore",
       "url": "https://github.com/panahister/mpcore",
       "group": "foundation",
       "role": "backend",
-      "maturity": "published-packages"
+      "maturity": "stable-major-version",
+      "version": "1.0.0",
+      "registry": "https://www.nuget.org/packages/MPCore.Cli"
     },
     {
       "name": "mpfrontend",
       "url": "https://github.com/panahister/mpfrontend",
       "group": "foundation",
       "role": "frontend",
-      "maturity": "public-source-poc"
+      "maturity": "stable-major-version",
+      "version": "1.0.0",
+      "registry": "https://www.npmjs.com/org/mpfrontend"
     },
     {
       "name": "mpcore-tiffin-sample",

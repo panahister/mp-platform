@@ -7,7 +7,7 @@ where a team can stop without inheriting the rest of the ecosystem.
 
 Choose this path when the product needs .NET architecture and does not need MP Frontend.
 
-1. Install MP Core CLI and templates at one immutable version.
+1. Install MP Core CLI and templates at one immutable version (`1.0.0`, the first stable major version).
 2. Generate a disposable backend with the intended shape, transports, messaging, cache, and audit choices.
 3. Select `--ai-tooling codex`, `claude`, or `both` if repository-scoped agent procedures are in scope.
 4. Implement one real vertical slice with a business rule and a negative case, using the named generated
@@ -25,7 +25,9 @@ require MP Frontend or Tiffin.
 
 Choose this path when the product already has APIs and may already own a Figma/DLS source.
 
-1. Verify MP Frontend from source and run the independent-consumer gate.
+1. Create a workspace with the MP Frontend `1.0.0` CLI from npm, as its
+   [quick start](https://github.com/panahister/mpfrontend#quick-start-a-new-product-workspace) shows, or verify MP Frontend
+   from source and run its independent-consumer gate.
 2. Choose `none` for code-first design or `existing` for an approved consumer-owned export.
 3. Dry-run, install, and check the Base AI skill profile for Codex, Claude Code, or both when agent
    procedures are in scope.
@@ -73,7 +75,7 @@ The public repositories provide source and reference evidence. A production prog
 - accessibility, privacy, data retention, regulatory, and operational acceptance;
 - version governance, dependency maintenance, incident response, and SLOs.
 
-Do not convert a passing POC gate into a deployment approval without this continuation.
+Do not convert a passing evaluation gate into a deployment approval without this continuation.
 
 For both foundation paths, [AI engineering](ai-engineering.md) defines the procedure catalog, installation
 model, human authority, evidence boundary, and the difference between source portability and model parity.

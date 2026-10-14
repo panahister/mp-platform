@@ -272,7 +272,7 @@ is a troubleshooting last step, not a routine restart.
 ## What these modes prove
 
 All three modes exercise the same source boundaries and runtime architecture. Full Demo proves that a
-new evaluator can build and start the integrated POC without installing both product toolchains.
+new evaluator can build and start the integrated reference without installing both product toolchains.
 Frontend and Hybrid modes prove that each discipline can retain a practical debugger and
 feedback loop without replacing another boundary with mocks.
 

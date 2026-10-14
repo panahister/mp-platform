@@ -12,7 +12,9 @@ says exactly what was tested.
 [![License](https://img.shields.io/badge/license-Apache--2.0-6267e8)](LICENSE)
 [![Backend](https://img.shields.io/badge/backend-.NET%2010-315fe8)](https://github.com/panahister/mpcore)
 [![Frontend](https://img.shields.io/badge/frontend-React%20%2B%20Next.js-7c5ce7)](https://github.com/panahister/mpfrontend)
-[![Status](https://img.shields.io/badge/status-public%20POC-14b8a6)](docs/maturity.md)
+[![MP Core on NuGet](https://img.shields.io/nuget/v/MPCore.Cli?label=MP%20Core&color=315fe8)](https://www.nuget.org/packages/MPCore.Cli)
+[![MP Frontend on npm](https://img.shields.io/npm/v/%40mpfrontend%2Fftg-cli?label=MP%20Frontend&color=7c5ce7)](https://www.npmjs.com/package/@mpfrontend/ftg-cli)
+[![Maturity](https://img.shields.io/badge/foundations-1.0%20stable%20API-14b8a6)](docs/maturity.md)
 
 [Choose a path](#choose-your-path) ·
 [Run Tiffin locally](docs/local-workflows.md) ·
@@ -164,11 +166,11 @@ credentials, or runtime state.
 
 ### Backend foundation
 
-Install the published MP Core `0.9.3` CLI and template:
+Install the MP Core `1.0.0` CLI and template from nuget.org:
 
 ```bash
-dotnet tool install --global MPCore.Cli --version 0.9.3
-dotnet new install MPCore.Templates::0.9.3
+dotnet tool install --global MPCore.Cli --version 1.0.0
+dotnet new install MPCore.Templates::1.0.0
 ```
 
 Create a backend with explicit architecture choices:
@@ -189,17 +191,21 @@ Continue with the [MP Core getting-started guide](https://github.com/panahister/
 
 ### Frontend foundation
 
-MP Frontend is currently a public source POC; its packages are not yet published to a registry. Evaluate
-the exact source and its independent-consumer gate:
+Create a product workspace with the MP Frontend `1.0.0` CLI from npm. It pins every `@mpfrontend` package to that
+exact version and binds the scope to the public npm registry in `.npmrc` (Node.js 24, pnpm `11.25.0`):
 
 ```bash
-git clone https://github.com/panahister/mpfrontend.git
-cd mpfrontend
-pnpm install --frozen-lockfile
-pnpm check --skip-nx-cache
-pnpm pack:local
-pnpm exec nx run distribution:consumer-check
+pnpm --package=@mpfrontend/ftg-cli@1.0.0 dlx mpfrontend init --name my-product --directory ./my-product --design-source none
+cd my-product
+pnpm install
+pnpm exec mpfrontend create app --name customer --directory apps/customer
+pnpm install
 ```
+
+Supply the approved OpenAPI contract that the app's catalog reads, then run `pnpm check`; the
+[quick start](https://github.com/panahister/mpfrontend#quick-start-a-new-product-workspace) says where it goes. To
+evaluate the foundation's own source, clone it and run `pnpm check --skip-nx-cache`, `pnpm pack:local` and
+`pnpm exec nx run distribution:consumer-check`.
 
 Choose `none` for a code-first design source or `existing` for an approved consumer-owned Figma/DLS
 export. MP Frontend validates local reviewed artifacts; it does not request design credentials, mutate the
@@ -328,9 +334,10 @@ currently includes:
 - Real food-delivery success, compensation, concurrency, idempotency, tenant-isolation, identity,
   service-outage, media, tracking, and notification journeys.
 
-This evidence establishes a reusable public POC and reference implementation. It does **not** claim
-production HA, deployment approval, load qualification, formal accessibility certification, managed
-secret custody, regional failover, or published MP Frontend registry packages. Read the
+Both foundations are at 1.0.0, their first stable major version: MP Core on nuget.org and MP Frontend on npm, each
+under a compatibility policy that only a major version breaks, with a build that compares the public API with the last
+published version. The evidence does **not** claim production HA, deployment approval, load qualification, formal
+accessibility certification, managed secret custody, or regional failover; those remain each product's own gates. Read the
 [maturity and evidence boundary](docs/maturity.md) before adopting the platform.
 
 ## Principles

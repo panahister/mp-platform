@@ -201,7 +201,7 @@ files for the combined profile. Those gates prove source and installation behavi
 that two models will make identical product decisions, produce identical code, or satisfy visual and
 business acceptance without review.
 
-The public POC therefore claims:
+The platform therefore claims:
 
 - one canonical procedure source per skill;
 - native repository discovery for Codex and Claude Code;

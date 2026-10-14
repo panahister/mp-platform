@@ -14,12 +14,17 @@ known mitigation. Remove credentials, tokens, cookies, private URLs, personal da
 material from the report.
 
 The maintainer will investigate a complete report and coordinate disclosure after a fix or mitigation is
-available. No fixed response time is promised for this proof-of-concept ecosystem.
+available. No fixed response time is promised.
 
 ## Supported versions
 
 This repository contains documentation and navigation only. Its latest `main` is the supported source.
-Runtime support and release lines are documented by each owning repository.
+Runtime support and release lines are documented by each owning repository. Both foundations are at 1.0.0 and follow
+the same rule in their README "Versioning": a fix ships in a new version of the current major version, and after a new
+major version the previous one receives security fixes and fixes of defects that lose data or break security for 12
+months, never past the end of support of the runtime it targets (.NET for MP Core, Node.js for MP Frontend). See the
+[MP Core security policy](https://github.com/panahister/mpcore/blob/main/SECURITY.md) and the
+[MP Frontend security policy](https://github.com/panahister/mpfrontend/blob/main/SECURITY.md).
 
 ## Security boundary
 
