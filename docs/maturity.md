@@ -14,7 +14,7 @@ a universal production certificate.
 | Frontend AI procedures | Eighteen finite source procedures; CLI and format tests cover catalog, repository-local installation, dry-run, ownership collision, locking, rollback conflict, and thirty-six installed Codex/Claude files for the combined profile |
 | Tiffin AI routing | Ten root `tiffin-*` skills for both agents route work to the owning one of nine services; every service carries all ten canonical MP Core product procedures. The sixteen scenario stories prove system behavior, not model parity |
 | Design-source lifecycle | Code-first `none` and consumer-owned `existing` paths, legacy-template refusal, attachment/status, reviewed candidate lifecycle, path/symlink controls, writer locking, ownership, drift, and isolated guard removals |
-| References and versions | The references move to 1.0.0 in their own changes after the publications: today Tiffin's backend pins MP Core `0.9.3`, Storefront `0.9.1`, and the Tiffin frontend uses its vendored development cohort of MP Frontend |
+| References and versions | Tiffin's backend and Storefront build with MP Core `1.0.0` from nuget.org; the Tiffin frontend still uses its vendored development cohort of MP Frontend and moves to `1.0.0` in its own change |
 | Storefront | Release build with zero warnings or errors; 290 source tests in the current publication verification; complete edge-off and Keycloak scenario jobs on `main` |
 | Tiffin backend | 313 Release tests in the current publication verification; full RustFS/edge-off and SeaweedFS/Keycloak-edge GitHub scenario matrices; sixteen local business scenarios with 286 checks |
 | Tiffin frontend | Frozen install and nineteen uncached lint, typecheck, test, build, generated-contract, and design-theme targets |

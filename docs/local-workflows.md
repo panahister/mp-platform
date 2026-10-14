@@ -39,9 +39,10 @@ git clone https://github.com/panahister/tiffin-keycloak.git
 git clone https://github.com/panahister/tiffin-apisix.git
 ```
 
-No MP Core source clone is required: Tiffin consumes the published `0.9.3` packages by default. Backend
+No MP Core source clone is required: Tiffin consumes the published MP Core `1.0.0` packages by default. Backend
 maintainers may place an `mpcore` clone beside Tiffin when they explicitly want the sample to build
-against framework source.
+against framework source; run `./eng/restore-api-baseline.sh` once in that clone first, or its build stops with
+`MPCORE0005` (the API check needs the last published packages).
 
 ## Compare the workflows
 
